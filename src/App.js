@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useRef } from 'react';
+import iframeResize from 'iframe-resizer/js/iframeResizer';
 
 function App() {
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    if (!iframeRef.current) {
+      return;
+    }
+    const iframe = iframeRef.current;
+    iframeResize({}, iframe);
+    return () => {
+      iframe.iFrameResizer.removeListeners();
+    };
+  }, [iframeRef]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="iframe-container">
+        <iframe ref={iframeRef} src="http://localhost:3001/4c3c8bd0-74a1-48ac-93d0-fa3ed2206680" sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-forms"></iframe>
+      </div>
     </div>
   );
 }

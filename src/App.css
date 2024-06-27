@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.iframe-container iframe {
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  border: none;
+  min-height: 550px;
+}
